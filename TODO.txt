@@ -1,0 +1,50 @@
+Indexing Flow
+1. Run SetupIndexMapping.py and config mapping and fields
+2. Run GenDocs.py to create sample document from website to 3 types of data student, staff and cake
+3. Run IndexData.py to index the 3 txt files generated form GenDocs.py and index to es
+
+
+------------------------------------
+Indexing
+------------------------------------
+[X]     Fields to index --> BSetupIndexMapping.py , enabled: true
+[X]     Mapping fields --> BSetupIndexMapping.py
+[X]     title ??? no specific title field
+[X]     bulk import --> BIndexData.py
+[ ]     Chinese sentence breaking
+[ ]     Stemming https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-lang-analyzer.html
+[ ]     Stop Word
+
+------------------------------------
+Query & Searching
+------------------------------------
+[ ]     Field Text Search
+[X]     Highlight & Summary
+[ ]     Security role based
+[X]     Print fields  --> BTestQuery.py
+[ ]     Weighting for fields
+[X]     Reason for the score  this require document id & search keyword as input
+[ ]     Synonym search --> https://www.elastic.co/guide/en/elasticsearch/reference/5.0/analysis-synonym-tokenfilter.html
+[ ]     Stemming
+[X]     Pagination
+[ ]     Sort by date, size, numeric fields
+[ ]     Parametric Search multi levels --> check aggregation
+[ ]     Suggestion terms
+
+
+------------------------------------
+Profile & Security
+------------------------------------
+[ ]     Search with diff user roles return diff results  --> need customize ?
+[ ]     Suggest or preference return with profile
+
+------------------------------------
+Sizing & Performance
+------------------------------------
+[ ]     Support how large files
+[ ]     Coordination between nodes
+[ ]     Perform load test
+[ ]     Compact
+[ ]     Ram / disk / cpu IO
+
+
