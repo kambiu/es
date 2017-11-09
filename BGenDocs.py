@@ -114,7 +114,9 @@ def gen_teacher(num):
             "content": get_content(i, url, xpath),
             "active": randint(0, 1)
         }
-
+a = []
+for i in range(0,5):
+    a.append("{0:.2f}".format(uniform(10, 100)))
 
 def gen_cake(num):
     url = "https://greatist.com/eat/dessert-recipes-for-one"
@@ -125,7 +127,7 @@ def gen_cake(num):
             "date_created": date_random,
             "date_expired": get_larger_date(date_random, "%Y/%m/%d"),
             "price": "{0:.1f}".format(uniform(250, 1000)),
-            "weight": "{0:.2f}".format(uniform(10, 100)),
+            "weight": ["{0:.2f}".format(uniform(10, 100)) for i in range(0,5)],
             "grade": grade[randint(0, 5)],
             "content": get_content(i, url, xpath),
             "active": randint(0, 1)

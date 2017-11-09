@@ -29,8 +29,8 @@ indices_templates = {
                     },
                     "age": {"type": "integer"},
                     "height": {"type": "float"},
-                    "courses": {"type": "text"}, #["chinese", "english", "maths", "accounting" .. etc]
-                    "grade": {"type": "keyword"},  # A | B | C |D
+                    "courses": {"type": "keyword"},
+                    "grade": {"type": "keyword"},
                     "content": {"type": "text"},
                     "active": {"type": "boolean"}
                 }
@@ -48,7 +48,7 @@ indices_templates = {
                     },
                     "age": {"type": "integer"},
                     "height": {"type": "float"},
-                    "courses": {"type": "text"},
+                    "courses": {"type": "keyword"},
                     "content": {"type": "text"},
                     "active": {"type": "boolean"}
                 }
