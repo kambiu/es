@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8" />
+<title>Awesomplete</title>
+<link rel="stylesheet" href="awesomplete.css" />
+<link rel="stylesheet" href="style.css" />
+<script src="awesomplete.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+<h1>Awesomplete Demo</h1>
+
+
+<label>
+	<h1>
+	Pick a programming language:<br />
+	<input id="auto" class="awesomplete" list="autolist" />
+	</h1>
+	<datalist id="autolist">
+		<option>Ada</option>
+		<option>Java</option>
+		<option>JavaScript</option>
+		<option>Brainfuck</option>
+		<option>LOLCODE</option>
+		<option>Node.js</option>
+		<option>Ruby on Rails</option>
+	</datalist>
+</label>
+
+
+
+<script>
+	$("#auto").keyup(function(event) {
+		console.log("great");
+		$.get('test.py', function(ret) {
+			console.log("return");
+			console.log(ret);
+		})
+	});
+</script>
+
+</body>
+</html>

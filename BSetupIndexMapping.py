@@ -1,7 +1,7 @@
 from elasticsearch import Elasticsearch
 
 
-es = Elasticsearch(["localhost:9200"])
+es = Elasticsearch(["127.0.0.1:9200"])
 
 
 """ configuration """
@@ -9,13 +9,13 @@ es = Elasticsearch(["localhost:9200"])
 indices_templates = {
     # index #1
     "school": {
-        "settings": {
+        "index_settings": {
             "number_of_shards": 1,
             "number_of_replicas": 1
         },
         # same field name in same index but different type cannot have different analyzer, eg. date_modified
         # aka in one index, one field name only one mapping can be applied
-        "mappings": {
+        "type_mappings": {
             # type 1 of index #1
             "student": {
                 "properties": {
@@ -57,11 +57,11 @@ indices_templates = {
     },
     # index #2
     "backery": {
-        "settings": {
+        "index_settings": {
             "number_of_shards": 1,
             "number_of_replicas" : 1
         },
-        "mappings": {
+        "type_mappings": {
             # type 1 of index #2
             "cake": {
                 "properties": {
@@ -81,6 +81,21 @@ indices_templates = {
                 }
             }
         }
+    },
+    # index #3
+    "words": {
+        "index_settings": {
+            "number_of_shards": 1,
+            "number_of_replicas" : 1
+        },
+        "type_mappings": {
+            # type 1 of index #2
+            "all": {
+                "properties": {
+                    "content": {"type": "text"}
+                }
+            }
+        }
     }
 }
 
@@ -89,10 +104,12 @@ indices_templates = {
 
 def create_index_mapping():
     for index_name, config in indices_templates.items():
+        # create index with shards & replica
         es.indices.delete(index=index_name, ignore=([404]))
-        es.indices.create(index=index_name, body=config["settings"])
+        es.indices.create(index=index_name, body=config["index_settings"])
 
-        for type, prop in config["mappings"].items():
+        # create mapping for each types in the index creating
+        for type, prop in config["type_mappings"].items():
             print("{} {}".format(type, prop))
             es.indices.put_mapping(index=index_name, doc_type=type, body=prop)
 

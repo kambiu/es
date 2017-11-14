@@ -143,14 +143,14 @@ def write_file(index, type, data):
 
 
 def main():
-    # students = gen_student(108)
-    # write_file("school", "student", students)
+    students = gen_student(108)
+    write_file("school", "student", students)
 
     # teachers = gen_teacher(152)
     # write_file("school", "staff", teachers)
 
-    cakes = gen_cake(42)
-    write_file("backery", "cake", cakes)
+    # cakes = gen_cake(42)
+    # write_file("backery", "cake", cakes)
 
     print("Program end")
 

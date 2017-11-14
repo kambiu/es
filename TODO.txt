@@ -35,7 +35,7 @@ Query & Searching --> BTestQuery.py
 [ ]     autocomplete --> indexing ?
 
 ** in progress
-[X]     suggest word for spelling mistakes
+[X]     suggest word for spelling mistakes, working on getting words from wrodnet to index
 
 
 ------------------------------------
