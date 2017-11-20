@@ -272,23 +272,28 @@ def aggregation(es):
 
 def suggest(es):
 
+    # completion suggester is input text and output suggest document, not suggest wordings
     options = [
-        {"suggest1":{
-                "text": "sugar",
+        {"term_suggester":{
+                "text": "sguar", # give a  wrong word and suggest back sugar
                 "term": {"field": "content"}
-        }},{"suggest2":{
-                "text": "sugar",
-                "term": {"field": "content"}
-        }},{"suggest3":{
-                "text": "sugar",
-                "term": {"field": "content"}
-        }},{"suggest4":{
-                "text": "sugar",
-                "term": {"field": "content"}
-        }},{"suggest5":{
-                "text": "sugar",
-                "term": {"field": "content"}
-        }}
+        }},
+
+        # completeion_suggester refer to autocomplete.html
+
+        # }},{"suggest2":{
+        #         "text": "sugar",
+        #         "term": {"field": "content"}
+        # }},{"suggest3":{
+        #         "text": "sugar",
+        #         "term": {"field": "content"}
+        # }},{"suggest4":{
+        #         "text": "sugar",
+        #         "term": {"field": "content"}
+        # }},{"suggest5":{
+        #         "text": "sugar",
+        #         "term": {"field": "content"}
+        # }}
     ]
 
     for option in options:
@@ -303,10 +308,10 @@ def suggest(es):
 
         # results = es.search(body=json.dumps(query_dsl))
         results = es.search(index="_all", doc_type="", body=json.dumps(query_dsl))
-        print(results)
-        print("Number of returns [suggest-{}]: {}".format(option, len(results["hits"]["hits"])))
+        # print(results)
+        print("Number of returns [suggest-{}]: {}".format(list(option.keys())[0], len(results["hits"]["hits"])))
 
-        for value in results["suggest"][option]:
+        for value in results["suggest"][list(option.keys())[0]]:
             print(value)
 
 

@@ -90,9 +90,9 @@ indices_templates = {
         },
         "type_mappings": {
             # type 1 of index #2
-            "all": {
+            "autocomplete": {
                 "properties": {
-                    "content": {"type": "text"}
+                    "suggest": {"type": "completion"}
                 }
             }
         }

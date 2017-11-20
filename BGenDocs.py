@@ -6,6 +6,8 @@ import lxml.html as LH
 import lxml.html.clean as clean
 import re
 import json
+from nltk.corpus import wordnet as wn
+
 
 es = Elasticsearch(["localhost:9200"])
 
@@ -134,6 +136,29 @@ def gen_cake(num):
         }
 
 
+def gen_auto_complete_words(index, type):
+    filename = "{}_{}.txt".format(index, type)
+
+    lst_words = []
+
+    count = 0
+    for synset in list(wn.all_synsets('n')):
+        lst_words.append(synset.lemma_names()[0])
+        count += 1
+        if count > 100:
+            break
+
+    with open(filename, "w") as stream:
+
+        for word in lst_words:
+            dict_data = dict()
+            dict_data["suggest"] = dict()
+            dict_data["suggest"]["input"] = [word]
+
+            stream.write('{"index": {"_index": "' + index + '", "_type": "' + type + '"}}\n')
+            stream.write(json.dumps(dict_data) + "\n")
+
+
 def write_file(index, type, data):
     filename = "{}_{}.txt".format(index, type)
     with open(filename, "w") as stream:
@@ -143,14 +168,16 @@ def write_file(index, type, data):
 
 
 def main():
-    students = gen_student(108)
-    write_file("school", "student", students)
+    # students = gen_student(108)
+    # write_file("school", "student", students)
 
     # teachers = gen_teacher(152)
     # write_file("school", "staff", teachers)
 
     # cakes = gen_cake(42)
     # write_file("backery", "cake", cakes)
+
+    gen_auto_complete_words("words", "autocomplete")
 
     print("Program end")
 
