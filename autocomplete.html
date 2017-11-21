@@ -1,158 +1,62 @@
-<!--Make sure to add-->
-<!--------------------------------->
-<!--../config/elasticsearch.yml-->
-<!--------------------------------->
-<!--http.cors.enabled: true-->
-<!--http.cors.allow-origin: "*"-->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<meta charset="utf-8" />
-<title>Awesomplete</title>
-<link rel="stylesheet" href="awesomplete.css" />
-<link rel="stylesheet" href="style.css" />
-<script src="awesomplete.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Autocomplete</title>
+    <link rel="stylesheet" href="awesomplete.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="awesomplete.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
-
 <body>
-<h1>Awesomplete Demo</h1>
+
+<p>
+  Please enter country. Results are fetched from https://restcountries.eu/
+</p>
+<input id="auto" placeholder="Enter a word"/>
 
 
-<!--<label>-->
-	<!--<h1>-->
-	<!--Pick a programming language:<br />-->
-	<!--<input id="auto" class="awesomplete" list="autolist" />-->
-	<!--</h1>-->
-	<!--<datalist id="autolist">-->
-		<!--<option>Ada</option>-->
-		<!--<option>Java</option>-->
-		<!--<option>JavaScript</option>-->
-		<!--<option>Brainfuck</option>-->
-		<!--<option>LOLCODE</option>-->
-		<!--<option>Node.js</option>-->
-		<!--<option>Ruby on Rails</option>-->
-	<!--</datalist>-->
-<!--</label>-->
-
-<section id="ajax-example">
-	<h2>Ajax example <small>(restcountries.eu api)</small></h2>
-	<label class="">Select French speaking country <input id="auto" type="text"></label>
-	<pre class="language-javascript"><code><script>
-
-	$(document).ready(function(){
-		console.log("Querying from es...")
-
-		var input_text = document.getElementById("auto").value;
-
-		var url = "http://localhost:9200/_search?pretty"
-		var query_dsl = {
-			"suggest": {
-				"keyword-suggest":{
-					"prefix": input_text,
-					"completion": {
-						"field": "suggest",
-						"size": 10
-					}
-				}
-			}
-		}
-		$.ajax({
-			type: 'POST',
-			url: url,
-			dataType: 'json',
-			data: JSON.stringify(query_dsl),
-			success: function (data) {
-				var options = data["suggest"]["keyword-suggest"][0]["options"];
-				console.log(options);
-				var arr = new Array();
-				var option_html = '';
-				for (var i=0; i<options.length; i++){
-					// console.log("i:" + i);
-					var word = options[i]["text"];
-					option_html += '<option value="' + word + '" />';
-					// console.log(word);
-					arr.push(word)
-				}
-				// output
-				//var list = JSON.parse(ajax.responseText).map(function(i) { return i.name; });
-				var list = arr;
-
-				new Awesomplete(document.querySelector("#ajax-example input"),{ list: list });
-
-			}
-		});
-	});
-
-		<!--var ajax = new XMLHttpRequest();-->
-		<!--ajax.open("GET", "https://restcountries.eu/rest/v1/lang/fr", true);-->
-		<!--ajax.onload = function() {-->
-			<!--var list = JSON.parse(ajax.responseText).map(function(i) { return i.name; });-->
-			<!--new Awesomplete(document.querySelector("#ajax-example input"),{ list: list });-->
-		<!--};-->
-		<!--ajax.send();-->
-	</script></code></pre>
-	</section>
-
-
-<!--dict_query_dsl = {-->
-	<!--"suggest": {-->
-		<!--"keyword-suggest":{-->
-			<!--"prefix": prefix,-->
-			<!--"completion": {-->
-				<!--"field": "suggest",-->
-				<!--"size": 5-->
-			<!--}-->
-		<!--}-->
-	<!--}-->
-<!--}-->
 <script>
-	$("#qq").keyup(function(event) {
-		console.log("Querying from es...")
 
-		var input_text = document.getElementById("auto").value;
+    var min_chars = 3;
+    var input = document.getElementById("auto");
+    var awesomplete = new Awesomplete(input, {
+          minChars: min_chars,
+          autoFirst: true
+    });
 
-		var url = "http://localhost:9200/_search?pretty"
-		var query_dsl = {
-			"suggest": {
-				"keyword-suggest":{
-					"prefix": input_text,
-					"completion": {
-						"field": "suggest",
-						"size": 10
-					}
-				}
-			}
-		}
-		$.ajax({
-			type: 'POST',
-			url: url,
-			dataType: 'json',
-			data: JSON.stringify(query_dsl),
-			success: function (data) {
-				var options = data["suggest"]["keyword-suggest"][0]["options"];
-				console.log(options);
-				var arr = new Array();
-				var option_html = '';
-				for (var i=0; i<options.length; i++){
-					console.log("i:" + i);
-					var word = options[i]["text"];
-					option_html += '<option value="' + word + '" />';
-					console.log(word);
-					arr.push(word)
-				}
-				new Awesomplete(document.querySelector("#auto"),{ list: arr });
-				//console.log("----");
-				//document.getElementById('autolist').innerHTML = option_html;
-				//console.log("FF")
-				//$('auto').keydown();
-			}
-		});
+    $("input").on("keyup", function(){
+        if (this.value && this.value.length >= min_chars) {
+            console.log("get " + this.value);
+            var auto_url = "http://localhost:9200/_search?pretty"
+            var query_dsl = {
+                "suggest": {
+                    "keyword-suggest":{
+                        "prefix": this.value,
+                        "completion": {
+                            "field": "suggest",
+                            "size": 10
+                        }
+                    }
+                }
+            }
 
-	});
+            $.ajax({
+                url: auto_url,
+                type: 'POST',
+                dataType: 'json',
+                data: JSON.stringify(query_dsl),
+                success: function(data) {
+                    var options = data["suggest"]["keyword-suggest"][0]["options"];
+                    var list_options = [];
+                    for (var i=0; i<options.length; i++){
+                        list_options.push(options[i]["text"]);
+                    }
+                    awesomplete.list = list_options;
+                }
+            });
+        }
+    });
 </script>
-
 </body>
 </html>
