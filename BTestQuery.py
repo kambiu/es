@@ -272,12 +272,16 @@ def aggregation(es):
 
 def suggest(es):
 
-    # completion suggester is input text and output suggest document, not suggest wordings
+    #TODO find out the context suggester later
+
     options = [
-        {"term_suggester":{
+        {
+            # phrase suggester is configured through index mapping
+            "term_suggester": {
                 "text": "sguar", # give a  wrong word and suggest back sugar
                 "term": {"field": "content"}
-        }},
+            }
+        },
 
         # completeion_suggester refer to autocomplete.html
 
