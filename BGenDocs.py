@@ -169,15 +169,15 @@ def write_file(index, type, data):
 
 def main():
     # students = gen_student(108)
-    # write_file("school", "student", students)
+    # write_file("student", "student", students)
 
     # teachers = gen_teacher(152)
-    # write_file("school", "staff", teachers)
+    # write_file("staff", "staff", teachers)
 
     # cakes = gen_cake(42)
-    # write_file("backery", "cake", cakes)
+    # write_file("cake", "cake", cakes)
 
-    gen_auto_complete_words("words", "autocomplete")
+    gen_auto_complete_words("words", "words")
 
     print("Program end")
 

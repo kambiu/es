@@ -1,0 +1,202 @@
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["entity"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["physical_entity"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["abstraction"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["thing"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["object"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["whole"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["congener"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["living_thing"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["organism"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["benthos"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["dwarf"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["heterotroph"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["parent"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["life"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["biont"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["cell"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["causal_agent"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["person"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["animal"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["plant"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["native"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["natural_object"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["substance"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["substance"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["matter"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["food"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["nutrient"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["artifact"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["article"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["psychological_feature"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["cognition"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["motivation"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["attribute"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["state"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["feeling"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["location"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["shape"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["time"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["space"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["absolute_space"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["phase_space"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["event"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["process"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["act"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["group"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["relation"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["possession"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["social_relation"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["communication"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["measure"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["phenomenon"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["thing"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["kindness"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["abdominoplasty"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["abort"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["accomplishment"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["agon"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["alienation"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["application"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["beachhead"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["cakewalk"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["feat"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["masterpiece"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["masterstroke"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["credit"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["action"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["res_gestae"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["course"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["blind_alley"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["collision_course"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["interaction"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["interplay"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["contact"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["brush"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["eye_contact"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["fetch"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["placement"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["interchange"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["reciprocity"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["cross-fertilization"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["dealings"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["relation"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["playing"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["play"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["boondoggle"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["bowling"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["acquiring"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["causing"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["delivery"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["departure"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["derring-do"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["discovery"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["disposal"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["hit"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["implementation"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["egress"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["equalization"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["exhumation"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["mitzvah"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["propulsion"]}}
+{"index": {"_index": "words", "_type": "words"}}
+{"suggest": {"input": ["rally"]}}
