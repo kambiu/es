@@ -64,9 +64,10 @@
 			url: url,
 			dataType: 'json',
 			data: JSON.stringify(query_dsl),
+			contentType: 'application/json',
 			success: function (data) {
 				var options = data["suggest"]["keyword-suggest"][0]["options"];
-				console.log(options);
+				<!-- console.log(options); -->
 				var arr = new Array();
 				var option_html = '';
 				for (var i=0; i<options.length; i++){
@@ -126,21 +127,23 @@
 				}
 			}
 		}
+		<!-- console.log("B4: " + JSON.stringify(query_dsl)) -->
 		$.ajax({
 			type: 'POST',
 			url: url,
 			dataType: 'json',
+			contentType: 'application/json',
 			data: JSON.stringify(query_dsl),
 			success: function (data) {
 				var options = data["suggest"]["keyword-suggest"][0]["options"];
-				console.log(options);
+				console.log("Return: " + options.length);
 				var arr = new Array();
 				var option_html = '';
 				for (var i=0; i<options.length; i++){
 					console.log("i:" + i);
 					var word = options[i]["text"];
 					option_html += '<option value="' + word + '" />';
-					console.log(word);
+					<!-- console.log(word); -->
 					arr.push(word)
 				}
 				new Awesomplete(document.querySelector("#auto"),{ list: arr });
