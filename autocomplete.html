@@ -28,7 +28,7 @@
     $("input").on("keyup", function(){
         if (this.value && this.value.length >= min_chars) {
             console.log("get " + this.value);
-            var auto_url = "http://localhost:9200/_search?pretty"
+            var auto_url = "http://localhost:9200/words/autocomplete/_search?pretty"
             var query_dsl = {
                 "suggest": {
                     "keyword-suggest":{
