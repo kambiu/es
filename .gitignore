@@ -102,4 +102,9 @@ ENV/
 
 # ide
 .idea
+
+# local files
 bk/
+
+# idx files
+idx_*.txt

@@ -137,7 +137,7 @@ def gen_cake(num):
 
 
 def gen_auto_complete_words(index, type):
-    filename = "{}_{}.txt".format(index, type)
+    filename = "idx_{}_{}.txt".format(index, type)
 
     lst_words = []
 
@@ -160,7 +160,7 @@ def gen_auto_complete_words(index, type):
 
 
 def write_file(index, type, data):
-    filename = "{}_{}.txt".format(index, type)
+    filename = "idx_{}_{}.txt".format(index, type)
     with open(filename, "w") as stream:
         for obj in data:
             stream.write('{"index": {"_index": "' + index + '", "_type": "' + type + '"}}\n')
