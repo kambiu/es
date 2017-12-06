@@ -76,7 +76,7 @@ def pagination(es):
                 "match": {"content": "the"}
             }
         }
-        results = es.search(index="school", doc_type="student", body=json.dumps(query_dsl))
+        results = es.search(index="student", doc_type="student", body=json.dumps(query_dsl))
         print("Number of returns [pagination-start from {}]: {}".format(start, len(results["hits"]["hits"])))
         for node in results["hits"]["hits"]:
             print(node)
@@ -110,7 +110,7 @@ def boolean_query(es):
                 }
             }
         }
-        results = es.search(index="school", doc_type="student", body=json.dumps(query_dsl))
+        results = es.search(index="student", doc_type="student", body=json.dumps(query_dsl))
         # print(results)
         print("Number of returns [boolean_query-{}]: {}".format(bool_choice, len(results["hits"]["hits"])))
         for node in results["hits"]["hits"]:
@@ -150,7 +150,7 @@ def field_text(es):
             "_source": ["grade", "age", "courses"],
             "query": option
         }
-        results = es.search(index="school", doc_type="student", body=json.dumps(query_dsl))
+        results = es.search(index="student", doc_type="student", body=json.dumps(query_dsl))
         # print(results)
         print("Number of returns [field_text={}]: {}".format(list(option.keys())[0], len(results["hits"]["hits"])))
         for node in results["hits"]["hits"]:
@@ -171,7 +171,7 @@ def stemming(es):
                 }
             }
         }
-        results = es.search(index="school", doc_type="student", body=json.dumps(query_dsl))
+        results = es.search(index="student", doc_type="student", body=json.dumps(query_dsl))
         print("Number of returns [stemming-{}]: {}".format(word, len(results["hits"]["hits"])))
         for node in results["hits"]["hits"]:
             print(node["highlight"])
@@ -205,7 +205,7 @@ def sorting(es):
             "sort": option
         }
 
-        results = es.search(index="school", doc_type="staff", body=json.dumps(query_dsl), filter_path=['hits.hits.*'])
+        results = es.search(index="student", doc_type="staff", body=json.dumps(query_dsl), filter_path=['hits.hits.*'])
         print("Number of returns [sorting-{}]: {}".format(name[idx], len(results["hits"]["hits"])))
         for node in results["hits"]["hits"]:
             print(node)
@@ -225,7 +225,7 @@ def sorting_with_array(es):
             "sort": {"weight": {"order": "asc", "mode": sorting_method}}
         }
 
-        results = es.search(index="backery", doc_type="cake", body=json.dumps(query_dsl))
+        results = es.search(index="cake", doc_type="cake", body=json.dumps(query_dsl))
         print("Number of returns [sorting_with_array-{}]: {}".format(sorting_method, len(results["hits"]["hits"])))
         for node in results["hits"]["hits"]:
             print(node)
@@ -318,12 +318,54 @@ def suggest(es):
         for value in results["suggest"][list(option.keys())[0]]:
             print(value)
 
+def score():
+    """
+    function to define score of query
+    1. use function score
+    2. use boosting query 
+    """
+
+    # 2 boosting query
+    positive_terms = "good"
+    negative_terms = "bad"
+
+    #TODO
+
+
+        query_dsl = {
+            "from": 0, "size": 100,
+            "_source": ["weight"],
+            "query": {
+                "match": {"content": "change"},
+                "boosting" : {
+                    "positive" : {
+                        "term" : {
+                            "field1" : positive_terms
+                        }
+                    },
+                    "negative" : {
+                        "term" : {
+                            "field2" : negative_terms
+                        }
+                    },
+                    "negative_boost" : 0.2
+                }
+            },
+
+            "sort": {"weight": {"order": "asc", "mode": sorting_method}}
+        }
+
+        results = es.search(index="cake", doc_type="cake", body=json.dumps(query_dsl))
+        print("Number of returns [sorting_with_array-{}]: {}".format(sorting_method, len(results["hits"]["hits"])))
+        for node in results["hits"]["hits"]:
+            print(node)
+
 
 def main():
     host = "localhost"
     port = 9200
     es = elasticsearch.Elasticsearch(['{}:{}'.format(host, port)])
-    suggest(es)
+    score(es)
 
 
 if __name__ == "__main__":
