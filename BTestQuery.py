@@ -113,8 +113,7 @@ def boolean_query(es):
         results = es.search(index="student", doc_type="student", body=json.dumps(query_dsl))
         # print(results)
         print("Number of returns [boolean_query-{}]: {}".format(bool_choice, len(results["hits"]["hits"])))
-        for node in results["hits"]["hits"]:
-            print(node)
+
 
 
 def field_text(es):
@@ -318,45 +317,54 @@ def suggest(es):
         for value in results["suggest"][list(option.keys())[0]]:
             print(value)
 
-def score():
+def score(es):
     """
     function to define score of query
-    1. use function score
-    2. use boosting query 
+    1. use function score --> redefine the score caluculation ??
+    2. use boosting query --> adjust score based on terms
     """
 
     # 2 boosting query
-    positive_terms = "good"
-    negative_terms = "bad"
+    # https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-boosting-query.html
 
-    #TODO
+    # must require both positive terms & negative terms
+    # positive -->  normal query words
+    # negative --> undesirable words
+    # negative_boost --> lower the words proirity
+    queries = {
+        "normal_query": {
+            "match": {"content": "get"}
+        },
+        "boost_query": {
+            "boosting" : {
+                "positive" : {
+                    "match" : {
+                        "content" : "get"
+                    }
+                },
+                "negative" : {
+                    "term" : {
+                        "content" : "happy"
+                    }
+                },
+                "negative_boost" : 0.2
+            }
+        }
+    }
 
-
+    for key, value in queries.items():
+        print(key)
         query_dsl = {
             "from": 0, "size": 100,
-            "_source": ["weight"],
-            "query": {
-                "match": {"content": "change"},
-                "boosting" : {
-                    "positive" : {
-                        "term" : {
-                            "field1" : positive_terms
-                        }
-                    },
-                    "negative" : {
-                        "term" : {
-                            "field2" : negative_terms
-                        }
-                    },
-                    "negative_boost" : 0.2
-                }
-            },
-
-            "sort": {"weight": {"order": "asc", "mode": sorting_method}}
+            "_source": ["grade"],
+            "query": { }
         }
+        query_dsl["query"] = value
+
+        print(query_dsl)
 
         results = es.search(index="cake", doc_type="cake", body=json.dumps(query_dsl))
-        print("Number of returns [sorting_with_array-{}]: {}".format(sorting_method, len(results["hits"]["hits"])))
+        print("Number of returns [score-{}-query]: {}".format(key, len(results["hits"]["hits"])))
         for node in results["hits"]["hits"]:
             print(node)
 

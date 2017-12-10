@@ -25,15 +25,15 @@ Query & Searching --> BTestQuery.py
 [X]     Field Text Search
 [X]     Highlight & Summary
 [X]     Print fields
-
-*** in progress working on boosting query
-[ ]     Weighting for fields
+[-]     Weighting for fields
+    [X] boosting query
+    [ ] score function
 [X]     Reason for the score  this require document id & search keyword as input
 [X]     Pagination
 [X]     Sort by date, size, numeric fields --> is able to sotring by min/max/avg for array fields
 [X]     Parametric Search multi levels --> check aggregation
 [ ]     Suggestion terms --> context suggest
-[ ]     search within results
+[X]     search within results --> use bool query
 [X]     autocomplete --> store words in index with completeion type | more to SetupIndexingMapping & autocomplete.html
 [X]     suggest word for spelling mistakes, working on getting words from wrodnet to index
 
