@@ -11,10 +11,14 @@ Indexing
 [X]     Mapping fields --> BSetupIndexMapping.py
 [X]     title ??? no specific title field
 [X]     bulk import --> BIndexData.py
-[ ]     Chinese sentence breaking
+
+*** in progress
+[-] Analysis
+[ ]     Chinese sentence breaking https://www.elastic.co/guide/en/elasticsearch/reference/current/_testing_analyzers.html
 [ ]     Stemming https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-lang-analyzer.html
 [ ]     Stop Word
 [ ]     Synonym https://www.elastic.co/guide/en/elasticsearch/reference/5.0/analysis-synonym-tokenfilter.html
+
 [ ]     Create Virtual field?
 [ ]     Update Index fields
 

@@ -317,6 +317,7 @@ def suggest(es):
         for value in results["suggest"][list(option.keys())[0]]:
             print(value)
 
+
 def score(es):
     """
     function to define score of query
@@ -369,11 +370,38 @@ def score(es):
             print(node)
 
 
+def test_analyzers(es):
+    """
+    #TODO
+    stemming
+    stopwords
+    filters
+    https://www.elastic.co/guide/en/elasticsearch/reference/current/_testing_analyzers.html
+    """
+    all_tokenizers = {
+        "1": {
+            "analyzer": "whitespace",
+            "text":     "The quick brown fox."
+        },
+        "2": {
+            "tokenizer": "standard",
+            "filter":  [ "lowercase", "asciifolding" ],
+            "text":      "Is this déja vu?"
+        }
+    }
+    es_idx = elasticsearch.client.IndicesClient(es)
+
+    for key, value in all_tokenizers.items():
+        results = es_idx.analyze(index=None, body=json.dumps(value))
+        print("--- {}".format(key))
+        print(results)
+
+
 def main():
     host = "localhost"
     port = 9200
     es = elasticsearch.Elasticsearch(['{}:{}'.format(host, port)])
-    score(es)
+    test_analyzers(es)
 
 
 if __name__ == "__main__":
