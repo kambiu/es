@@ -1,5 +1,7 @@
 import elasticsearch
 import json
+import BIndexData
+import BSetupIndexMapping
 
 """ notes 
 
@@ -49,7 +51,7 @@ def highlight_and_summary(es):
     query_dsl = {
         "_source": "*",
         "query": {
-            "match": {"content": "with"}
+            "match": {"content": "and"}
         },
         "highlight": {
             "fields": {
@@ -57,7 +59,7 @@ def highlight_and_summary(es):
             }
         }
     }
-    results = es.search(index="school", doc_type="student", body=json.dumps(query_dsl))
+    results = es.search(index="cake", doc_type="cake", body=json.dumps(query_dsl))
     print("Number of returns [print_fields-]: {}".format(len(results["hits"]["hits"])))
     for node in results["hits"]["hits"]:
         print(node["highlight"])
@@ -389,10 +391,9 @@ def test_analyzers(es):
             "text":      "Is this déja vu?"
         }
     }
-    es_idx = elasticsearch.client.IndicesClient(es)
 
     for key, value in all_tokenizers.items():
-        results = es_idx.analyze(index=None, body=json.dumps(value))
+        results = es.indices.analyze(index=None, body=json.dumps(value))
         print("--- {}".format(key))
         print(results)
 
@@ -401,7 +402,7 @@ def main():
     host = "localhost"
     port = 9200
     es = elasticsearch.Elasticsearch(['{}:{}'.format(host, port)])
-    test_analyzers(es)
+    highlight_and_summary(es)
 
 
 if __name__ == "__main__":
