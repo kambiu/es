@@ -16,7 +16,7 @@ Indexing
 [-] Analysis https://www.elastic.co/guide/en/elasticsearch/reference/current/_testing_analyzers.html
 [ ]     Chinese sentence breaking https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-tokenizers.html
 [ ]     Stemming https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-stemmer-tokenfilter.html
-[ ]     Stop Word https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-stop-tokenfilter.html
+[X]     Stop Word https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-stop-tokenfilter.html
 [ ]     Synonym https://www.elastic.co/guide/en/elasticsearch/reference/5.0/analysis-synonym-tokenfilter.html
 
 [ ]     Create Virtual field?

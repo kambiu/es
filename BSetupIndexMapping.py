@@ -56,7 +56,16 @@ indices_templates = {
     "cake": {
         "index_settings": {
             "number_of_shards": 1,
-            "number_of_replicas" : 1
+            "number_of_replicas" : 1,
+            "analysis": {
+                "analyzer": {
+                    "my_stop_analyzer": {
+                        "type": "stop",
+                        "stopwords_path": r"C:\elasticsearch-6.0.0\config\stopwords.txt"
+                        #"stopwords": ["the", "a"]
+                    }
+                }
+            }
         },
         "cake": {
             "properties": {
@@ -71,7 +80,10 @@ indices_templates = {
                 "price": {"type": "float"},
                 "weight": {"type": "float"},
                 "grade": {"type": "keyword"},
-                "content": {"type": "text"},
+                "content": {
+                    "type": "text",
+                    "analyzer": "my_stop_analyzer" #Important define analyzer in setting here
+                },
                 "active": {"type": "boolean"}
             }
         }
@@ -100,38 +112,15 @@ def create_index_mapping(es, index_name, config):
     es.indices.put_mapping(index=index_name, doc_type=index_name, body=config[index_name])
 
 
-def setup_stopword(es, idx_name):
-    """
-    Stop word is following to specific index
-    """
-    analysis_settings = {
-        "analysis": {
-            "analyzer": {
-                "my_english_analyzer": {
-                    "type": "standard",
-                    "max_token_length": 5,
-                    "stopwords": "_english_"
-                }
-            }
-        }
-    }
-    es.indices.close(idx_name)
-    print("Putting settings...")
-    es.indices.put_settings(index=idx_name, body=analysis_settings)
-    es.indices.open(idx_name)
-
-
 def main(es_index_name):
     es = Elasticsearch(["127.0.0.1:9200"])
 
     if es_index_name == "all":
         for index_name, config in indices_templates.items():
-             create_index_mapping(es, index_name, config)
+            create_index_mapping(es, index_name, config)
     else:
         create_index_mapping(es, es_index_name, indices_templates[es_index_name])
 
-    if es_index_name == "cake":
-        setup_stopword(es, "cake")
 
 
 if __name__ == "__main__":
