@@ -327,39 +327,56 @@ def score(es):
     2. use boosting query --> adjust score based on terms
     """
 
+    # 1 function score & script score
+    # https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html
+
     # 2 boosting query
     # https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-boosting-query.html
 
-    # must require both positive terms & negative terms
+    # must require both positive terms & negative terms & negative boost
     # positive -->  normal query words
     # negative --> undesirable words
     # negative_boost --> lower the words proirity
     queries = {
         "normal_query": {
-            "match": {"content": "get"}
+            "match": {"content": "sugar"}
         },
-        "boost_query": {
-            "boosting" : {
-                "positive" : {
-                    "match" : {
-                        "content" : "get"
-                    }
+        # 1
+        "func_score_query": {
+            "function_score": {
+                "query": {
+                    "match": { "content": "sugar" }
                 },
-                "negative" : {
-                    "term" : {
-                        "content" : "happy"
+                "script_score" : {
+                    "script" : {
+                        "source": "Math.log(1000 + doc['price'].value)" # it is able to order by price, but cannot find formula
                     }
-                },
-                "negative_boost" : 0.2
+                }
             }
-        }
+        },
+        # # 2
+        # "boost_query": {
+        #     "boosting" : {
+        #         "positive" : {
+        #             "match" : {
+        #                 "content" : "get"
+        #             }
+        #         },
+        #         "negative" : {
+        #             "term" : {
+        #                 "content" : "happy"
+        #             }
+        #         },
+        #         "negative_boost" : 0.2
+        #     }
+        # }
     }
 
     for key, value in queries.items():
         print(key)
         query_dsl = {
             "from": 0, "size": 100,
-            "_source": ["grade"],
+            "_source": ["grade", "price"],
             "query": { }
         }
         query_dsl["query"] = value
@@ -402,7 +419,7 @@ def main():
     host = "localhost"
     port = 9200
     es = elasticsearch.Elasticsearch(['{}:{}'.format(host, port)])
-    highlight_and_summary(es)
+    score(es)
 
 
 if __name__ == "__main__":
