@@ -61,7 +61,7 @@ indices_templates = {
                 "analyzer": {
                     "my_stop_analyzer": {
                         "type": "stop",
-                        "stopwords_path": r"C:\elasticsearch-6.0.0\config\stopwords.txt"
+                        "stopwords_path": r"stopwords.txt"
                         #"stopwords": ["the", "a"]
                     }
                 }
