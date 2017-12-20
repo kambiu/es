@@ -158,26 +158,6 @@ def field_text(es):
             print(node)
 
 
-def stemming(es):
-    words = ["start", "starts"]
-    for word in words:
-        query_dsl = {
-            "_source": "*",
-            "query": {
-                "match": {"content": word}
-            },
-            "highlight": {
-                "fields": {
-                    "content": {}
-                }
-            }
-        }
-        results = es.search(index="student", doc_type="student", body=json.dumps(query_dsl))
-        print("Number of returns [stemming-{}]: {}".format(word, len(results["hits"]["hits"])))
-        for node in results["hits"]["hits"]:
-            print(node["highlight"])
-
-
 def sorting(es):
 
     name = ["date_created asc > score", "score > date_modified desc", "height desc", "age asc"]
@@ -415,11 +395,51 @@ def test_analyzers(es):
         print(results)
 
 
+def synonym(es):
+    words = ["trial", "well", "hold on"] # refer to synonym.txt for the list of synonym words
+    words = ["well"]
+    for word in words:
+        query_dsl = {
+            "_source": "*",
+            "query": {
+                "match": {"content": word}
+            },
+            "highlight": {
+                "fields": {
+                    "content": {}
+                }
+            }
+        }
+        results = es.search(index="cake", doc_type="cake", body=json.dumps(query_dsl))
+        print("Number of returns [synonym-{}]: {}".format(word, len(results["hits"]["hits"])))
+        for node in results["hits"]["hits"]:
+            print(node["highlight"])
+
+
+def stemming(es):
+    words = ["start", "starts"]
+    for word in words:
+        query_dsl = {
+            "_source": "*",
+            "query": {
+                "match": {"content": word}
+            },
+            "highlight": {
+                "fields": {
+                    "content": {}
+                }
+            }
+        }
+        results = es.search(index="cake", doc_type="cake", body=json.dumps(query_dsl))
+        print("Number of returns [stemming-{}]: {}".format(word, len(results["hits"]["hits"])))
+        for node in results["hits"]["hits"]:
+            print(node["highlight"])
+
 def main():
     host = "localhost"
     port = 9200
     es = elasticsearch.Elasticsearch(['{}:{}'.format(host, port)])
-    score(es)
+    stemming(es)
 
 
 if __name__ == "__main__":

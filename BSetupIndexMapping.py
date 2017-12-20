@@ -8,7 +8,10 @@ indices_templates = {
     "student": {
         "index_settings": {
             "number_of_shards": 1,
-            "number_of_replicas": 1
+            "number_of_replicas": 1,
+            "blocks" : {
+                "read_only_allow_delete" : False
+            }
         },
         "student": {
             "properties": {
@@ -32,7 +35,10 @@ indices_templates = {
     "staff": {
         "index_settings": {
             "number_of_shards": 1,
-            "number_of_replicas": 1
+            "number_of_replicas": 1,
+            "blocks" : {
+                "read_only_allow_delete" : False
+            }
         },
         "staff": {
             "properties": {
@@ -57,12 +63,42 @@ indices_templates = {
         "index_settings": {
             "number_of_shards": 1,
             "number_of_replicas" : 1,
+            "blocks" : {
+                "read_only_allow_delete" : False
+            },
             "analysis": {
                 "analyzer": {
-                    "my_stop_analyzer": {
-                        "type": "stop",
-                        "stopwords_path": r"stopwords.txt"
-                        #"stopwords": ["the", "a"]
+                    # "my_stop_analyzer": { # only for stop wod
+                    #     "type": "stop",
+                    #     "stopwords_path": r"stopwords.txt",
+                    #     #"stopwords": ["the", "a"]
+                    # },
+                    # "synonym" : { # only for synonym
+                    #     "tokenizer" : "whitespace",
+                    #     "filter" : ["my_synonym"]
+                    # },
+                    "my_custom_analyzer":{ # to integrate syonoym, stop word into one analyzer for the field
+                        "type":      "custom",
+                        "tokenizer": "standard",
+                        "filter": [
+                            "my_synonym",
+                            "my_stop",
+                            "my_stemmer"
+                        ]
+                    }
+                },
+                "filter" : {
+                    "my_synonym" : {
+                        "type" : "synonym",
+                        "synonyms_path" : r"synonym.txt"
+                    },
+                    "my_stop": {
+                        "type":       "stop",
+                        "stopwords_path": r"stopwords.txt",
+                    },
+                    "my_stemmer" : {
+                        "type" : "stemmer",
+                        "name" : "english"
                     }
                 }
             }
@@ -82,7 +118,9 @@ indices_templates = {
                 "grade": {"type": "keyword"},
                 "content": {
                     "type": "text",
-                    "analyzer": "my_stop_analyzer" #Important define analyzer in setting here
+                    #"analyzer": "my_stop_analyzer" #Important define analyzer in setting here
+                    "analyzer": "my_custom_analyzer"
+
                 },
                 "active": {"type": "boolean"}
             }
@@ -97,6 +135,56 @@ indices_templates = {
         "words": {
             "properties": {
                 "suggest": {"type": "completion"}
+            }
+        }
+    },
+    # index #5
+    "chinese": {
+        "index_settings": {
+            "number_of_shards": 1,
+            "number_of_replicas": 1,
+            "blocks" : {
+                "read_only_allow_delete" : False
+            },
+            "analysis": {
+                "analyzer": {
+                    "my_chinese_custom_analyzer":{ # to integrate syonoym, stop word into one analyzer for the field
+                        "type":      "custom",
+                        "tokenizer": "standard",
+                        "filter": [ 
+                            my_synonym, # test whether chinese synonym and stop word can be applied
+                            my_stop,
+                            han_bigrams_filter
+                        ]
+                    }
+                },
+                 "filter" : {
+                    "my_synonym" : {
+                        "type" : "synonym",
+                        "synonyms_path" : r"synonym.txt"
+                    },
+                    "my_stop": {
+                        "type":       "stop",
+                        "stopwords_path": r"stopwords.txt",
+                    },
+                    "han_bigrams_filter" : {
+                        "type" : "cjk_bigram",
+                        "ignored_scripts": [
+                            "hiragana",
+                            "katakana",
+                            "hangul"
+                        ],
+                        "output_unigrams" : true
+                    }
+                }
+            }
+        },
+        "chinese": {
+            "properties": {
+                "content": {
+                    "type": "text",
+                    "analyzer": "my_custom_analyzer"
+                },
             }
         }
     }

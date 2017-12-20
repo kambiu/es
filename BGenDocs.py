@@ -136,6 +136,18 @@ def gen_cake(num):
         }
 
 
+def gen_chinese(num):
+    urls = [
+        "https://news.mingpao.com/pns/dailynews/web_tc/article/20171220/s00001/1513707114922",
+        "https://news.mingpao.com/pns/dailynews/web_tc/article/20171220/s00002/1513707126107",
+        "https://news.mingpao.com/pns/dailynews/web_tc/article/20171220/s00004/1513707174623"
+    ]
+    for url in urls:
+        yield {
+            "content": get_page_text(url)
+        }
+
+
 def gen_auto_complete_words(index, type):
     filename = "idx_{}_{}.txt".format(index, type)
 
@@ -174,8 +186,11 @@ def main():
     # teachers = gen_teacher(152)
     # write_file("staff", "staff", teachers)
 
-    cakes = gen_cake(42)
-    write_file("cake", "cake", cakes)
+    # cakes = gen_cake(42)
+    # write_file("cake", "cake", cakes)
+
+    chineses = gen_chinese(10)
+    write_file("chinese", "chinese", chineses)
 
     # gen_auto_complete_words("words", "words")
 
