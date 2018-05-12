@@ -152,9 +152,9 @@ indices_templates = {
                         "type":      "custom",
                         "tokenizer": "standard",
                         "filter": [ 
-                            my_synonym, # test whether chinese synonym and stop word can be applied
-                            my_stop,
-                            han_bigrams_filter
+                            "my_synonym", # test whether chinese synonym and stop word can be applied
+                            "my_stop",
+                            "han_bigrams_filter"
                         ]
                     }
                 },
@@ -174,7 +174,7 @@ indices_templates = {
                             "katakana",
                             "hangul"
                         ],
-                        "output_unigrams" : true
+                        "output_unigrams" : True
                     }
                 }
             }
@@ -183,7 +183,7 @@ indices_templates = {
             "properties": {
                 "content": {
                     "type": "text",
-                    "analyzer": "my_custom_analyzer"
+                    "analyzer": "my_chinese_custom_analyzer"
                 },
             }
         }

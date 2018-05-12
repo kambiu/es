@@ -18,7 +18,7 @@ grade = ["A+", "A", "B", "C", "D", "F"] #6
 courses = ["Economics", "English Language", "Commerce", "French", "Geography",
            "History", "Phsics" , "Religious Studies", "Visual Arts", "Physical Education",
            "Biology"] #11
-
+active = [False, True]
 """ end configuration """
 
 
@@ -97,7 +97,7 @@ def gen_student(num):
             "height": "{0:.2f}".format(uniform(1.5, 1.9)),
             "courses": courses[randint(0, 10)],
             "content": get_content(i, url, xpath),
-            "active": randint(0, 1),
+            "active": active[randint(0, 1)],
             "grade": grade[randint(0, 5)]
         }
 
@@ -114,7 +114,7 @@ def gen_teacher(num):
             "height": "{0:.2f}".format(uniform(1.5, 1.9)),
             "courses": [courses[randint(0, 10)], courses[randint(0, 10)], courses[randint(0, 10)], courses[randint(0, 10)], courses[randint(0, 10)]],
             "content": get_content(i, url, xpath),
-            "active": randint(0, 1)
+            "active": active[randint(0, 1)]
         }
 a = []
 for i in range(0,5):
@@ -132,7 +132,7 @@ def gen_cake(num):
             "weight": ["{0:.2f}".format(uniform(10, 100)) for i in range(0,5)],
             "grade": grade[randint(0, 5)],
             "content": get_content(i, url, xpath),
-            "active": randint(0, 1)
+            "active": active[randint(0, 1)]
         }
 
 
@@ -180,19 +180,19 @@ def write_file(index, type, data):
 
 
 def main():
-    # students = gen_student(108)
-    # write_file("student", "student", students)
+    students = gen_student(108)
+    write_file("student", "student", students)
 
-    # teachers = gen_teacher(152)
-    # write_file("staff", "staff", teachers)
+    teachers = gen_teacher(152)
+    write_file("staff", "staff", teachers)
 
-    # cakes = gen_cake(42)
-    # write_file("cake", "cake", cakes)
+    cakes = gen_cake(42)
+    write_file("cake", "cake", cakes)
 
     chineses = gen_chinese(10)
     write_file("chinese", "chinese", chineses)
 
-    # gen_auto_complete_words("words", "words")
+    gen_auto_complete_words("words", "words")
 
     print("Program end")
 
